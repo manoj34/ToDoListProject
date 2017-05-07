@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Todo</h1>
+
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ todo.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ todo.name }}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ todo.category }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ todo.description }}</td>
+            </tr>
+            <tr>
+                <th>Priority</th>
+                <td>{{ todo.priority }}</td>
+            </tr>
+            <tr>
+                <th>Duedate</th>
+                <td>{% if todo.dueDate %}{{ todo.dueDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdate</th>
+                <td>{% if todo.createDate %}{{ todo.createDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul class="list">
+        <li>
+            <a href="{{ path('todo_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('todo_edit', { 'id': todo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

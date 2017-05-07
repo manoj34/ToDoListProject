@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Todos list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Priority</th>
+                <th>Duedate</th>
+                <th>Createdate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for todo in todos %}
+            <tr>
+                <td><a href="{{ path('todo_show', { 'id': todo.id }) }}">{{ todo.id }}</a></td>
+                <td>{{ todo.name }}</td>
+                <td>{{ todo.category }}</td>
+                <td>{{ todo.description }}</td>
+                <td>{{ todo.priority }}</td>
+                <td>{% if todo.dueDate %}{{ todo.dueDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if todo.createDate %}{{ todo.createDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('todo_show', { 'id': todo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('todo_edit', { 'id': todo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('todo_new') }}">Create a new todo</a>
+        </li>
+    </ul>
+{% endblock %}
